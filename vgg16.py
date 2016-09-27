@@ -277,7 +277,7 @@ def get_features(folder, ydict):
         base = os.path.basename(img_name)
         Y[i] = ydict[base]
 
-        img1 = imread(sys.argv[1], mode='RGB')
+        img1 = imread(img_name, mode='RGB')
         img1 = imresize(img1, (224, 224))
 
 #      TODO implement fc2 extration
@@ -301,10 +301,9 @@ def process_folder(folder):
     ydict = load_txt(os.path.join(folder,'results.txt'))
     
     X, Y = get_features(os.path.join(folder, 'train/*jpg'), ydict)
-    X_test, Y_test = get_features(os.path.join(folder, 'test/*jpg'), ydict)
+    X_test, Y_test = #???
 
-    clf = SVC(random_state = 0)
-    clf.fit(X, Y)
+    #SVM?
 
     Y_test_pred = clf.predict(X_test)
     print(sum(Y_test == Y_test_pred))
@@ -312,4 +311,6 @@ def process_folder(folder):
 if __name__ == '__main__':
     process_image(path_to_image)
 
+
+    #use for 3)
     #process_folder(path_to_data)
