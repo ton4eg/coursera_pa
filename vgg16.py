@@ -255,7 +255,7 @@ def process_image(fname):
     imgs = tf.placeholder(tf.float32, [None, 224, 224, 3])
     vgg = vgg16(imgs, 'vgg16_weights.npz', sess)
 
-    img1 = imread(sys.argv[1], mode='RGB')
+    img1 = imread(fname, mode='RGB')
     img1 = imresize(img1, (224, 224))
 
     prob = sess.run(vgg.probs, feed_dict={vgg.imgs: [img1]})[0]
