@@ -247,7 +247,7 @@ class vgg16:
         weights = np.load(weight_file)
         keys = sorted(weights.keys())
         for i, k in enumerate(keys):
-            print i, k, np.shape(weights[k])
+            print(i, k, np.shape(weights[k]))
             sess.run(self.parameters[i].assign(weights[k]))
 
 def process_image(fname):
@@ -261,9 +261,9 @@ def process_image(fname):
     prob = sess.run(vgg.probs, feed_dict={vgg.imgs: [img1]})[0]
     preds = (np.argsort(prob)[::-1])[0:5]
     for p in preds:
-        print class_names[p], prob[p]
+        print(class_names[p], prob[p])
 
-def get_features(folder, ydict):
+def get_features(folder, ydict, my_fc2):
     sess = tf.Session()
     imgs = tf.placeholder(tf.float32, [None, 224, 224, 3])
     vgg = vgg16(imgs, 'vgg16_weights.npz', sess)
@@ -273,7 +273,7 @@ def get_features(folder, ydict):
     Y = np.zeros(len(paths))
 
     for i,img_name in enumerate(paths):
-        print img_name
+        print(img_name)
         base = os.path.basename(img_name)
         Y[i] = ydict[base]
 
@@ -282,7 +282,7 @@ def get_features(folder, ydict):
 
 #      TODO implement fc2 extration
 
-        fc2 = ??????
+        fc2 = my_fc2
         
         X[i, :] = fc2
     return X, Y
@@ -297,11 +297,11 @@ def load_txt(fname):
 
 
 
-def process_folder(folder):
+def process_folder(folder, X_test, Y_test):
     ydict = load_txt(os.path.join(folder,'results.txt'))
     
     X, Y = get_features(os.path.join(folder, 'train/*jpg'), ydict)
-    X_test, Y_test = #???
+    #X_test, Y_test = #???
 
     #SVM?
 
