@@ -273,8 +273,6 @@ def get_features(folder, ydict):
     Y = np.zeros(len(paths))
 
     for i,img_name in enumerate(paths):
-        if img_name == '.':
-            break
         print img_name
         base = os.path.basename(img_name)
         Y[i] = ydict[base]
